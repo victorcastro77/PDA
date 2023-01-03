@@ -1,3 +1,6 @@
+import java.util.Scanner;
+import java.util.InputMismatchException;
+
 /**
  * Permissible Dating Age program
  *
@@ -6,7 +9,9 @@
  */
 public class PDA
 {
-
+    Scanner scanner = new Scanner(System.in);
+    int age;
+    int LOWER_BOUND = (age/2) + 7;
     /**
      * Constructor for objects of class PDA
      */
@@ -15,17 +20,32 @@ public class PDA
         // We don't need to do anything in the constructor for
         // our program.
     }
-    
+
     /**
      * This is the main event loop for our PDA program
      */
     public void runEventLoop() {
-        System.out.println("PDA!");        
+        while (true) {
+            System.out.println("How old are you?");
+            try {
+                age = scanner.nextInt();
+                System.out.println(age);
+                if (age < LOWER_BOUND) {
+                    System.out.println(age+" is too young!!");
+                } else {
+                    System.out.println("Computations go here");                
+                }
+            } catch (InputMismatchException error) {
+                System.out.println("Please enter an integer");
+                scanner.next();
+            }
+        }
     }
 
     /**
      * The main method instantiates and runs the program
      */
+
     public static void main (String[] args) {
         PDA pda = new PDA();
         pda.runEventLoop();
