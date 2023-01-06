@@ -1,54 +1,61 @@
 import java.util.Scanner;
 import java.util.InputMismatchException;
-
-/**
- * Permissible Dating Age program
- *
- * @author Mr. Jaffe
- * @version 2021-06-22 Version 1.0.0
- */
 public class PDA
 {
-    Scanner scanner = new Scanner(System.in);
     int age;
-    int LOWER_BOUND = 14;
+    int youngerAge;
+    int olderAge;
     /**
      * Constructor for objects of class PDA
      */
     public PDA()
     {
-        // We don't need to do anything in the constructor for
-        // our program.
+        //eeieieiioioijweoijfoiewjjdsnkjsndcj
     }
-
+    
+    public int getYoungerAge(int age) {
+        return (age/2)+7;
+    }
+    
+    public int getOlderAge(int age) {
+        return (age-7)*2;
+    }
+    
     /**
      * This is the main event loop for our PDA program
      */
     public void runEventLoop() {
-        while (true) {
+        Scanner scanner = new Scanner(System.in);
+        boolean shouldContinue = true;
+        while (shouldContinue == true) {
             System.out.println("How old are you?");
             try {
                 age = scanner.nextInt();
-                if (age < LOWER_BOUND) {
-                    System.out.println(age+" is too young!!");
-                } else {
-                    System.out.println("Computations go here");                
-                }
+                System.out.println("Minimum age: "+getYoungerAge(age));
+                System.out.println("Maximum age: "+getOlderAge(age));
             } catch (InputMismatchException error) {
-                System.out.println("Please enter an integer");
                 scanner.next();
+                System.out.println("Please enter an integer");
             }
+            if (age == 0) {
+                shouldContinue = false;
+            } else {
+                shouldContinue = true;
+            }
+            if (age < 0) {
+                System.out.println("Please enter a real age");
+            } else if (getYoungerAge(age) > age || getOlderAge(age) < age) {
+                System.out.println(age+"is too young!");
+            }
+            System.out.println("Press 0 to quit at anytime.");
         }
     }
-    
 
     /**
      * The main method instantiates and runs the program
      */
-
     public static void main (String[] args) {
         PDA pda = new PDA();
         pda.runEventLoop();
     }
 }
-
