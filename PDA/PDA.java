@@ -10,15 +10,17 @@ public class PDA
      */
     public PDA()
     {
-        //eeieieiioioijweoijfoiewjjdsnkjsndcj
+        //ydsffffffffffffffffffffffffffffffffffffff
     }
     
-    public int getYoungerAge(int age) {
-        return (age/2)+7;
+    public double getYoungerAge(double age) {
+        age = ((age/2)+7);
+        return Math.ceil(age);
     }
     
-    public int getOlderAge(int age) {
-        return (age-7)*2;
+    public double getOlderAge(double age) {
+        age = (age-7)*2;
+        return Math.ceil(age);
     }
     
     /**
@@ -30,9 +32,18 @@ public class PDA
         while (shouldContinue == true) {
             System.out.println("How old are you?");
             try {
-                age = scanner.nextInt();
-                System.out.println("Minimum age: "+getYoungerAge(age));
-                System.out.println("Maximum age: "+getOlderAge(age));
+            age = scanner.nextInt();            
+            
+            if (age < 14) {
+                System.out.println(age+" is too young!");
+            } else if (age < 0) {
+                System.out.println("Please enter a real age");
+            } else if (getYoungerAge(age) > age || getOlderAge(age) < age) {
+                System.out.println(age+" is too young!");
+            } else {
+            System.out.println("Minimum age: "+getYoungerAge(age));
+            System.out.println("Maximum age: "+getOlderAge(age));
+            }
             } catch (InputMismatchException error) {
                 scanner.next();
                 System.out.println("Please enter an integer");
@@ -42,11 +53,7 @@ public class PDA
             } else {
                 shouldContinue = true;
             }
-            if (age < 0) {
-                System.out.println("Please enter a real age");
-            } else if (getYoungerAge(age) > age || getOlderAge(age) < age) {
-                System.out.println(age+"is too young!");
-            }
+            
             System.out.println("Press 0 to quit at anytime.");
         }
     }
